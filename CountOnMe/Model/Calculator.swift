@@ -15,6 +15,25 @@ class Calculator {
     var result = 0
     var enterNumber: [String] = [String]()
    
+
+    
+    // Error check computed variables
+    var expressionIsCorrect: Bool {
+        return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
+    }
+    
+    var expressionHaveEnoughElement: Bool {
+        return enterNumber.count >= 3
+    }
+    
+    var canAddOperator: Bool {
+        return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
+    }
+    
+    var expressionHaveResult: Bool {
+        return enterNumber.firstIndex(of: "=") != nil
+    }
+    
     func calcul(textField: UITextView) {
     
     let left = Int(enterNumber[0])!
