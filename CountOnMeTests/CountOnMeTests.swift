@@ -15,7 +15,13 @@ class CountOnMeTests: XCTestCase {
     
     func testAddition() {
         XCTAssertEqual(testCalcul.calcul(enterNumber: ["55", "+", "5"]), 60)
-      
+        XCTAssertEqual(testCalcul.calcul(enterNumber: ["18", "+", "2"]), 20)
+        XCTAssertEqual(testCalcul.calcul(enterNumber: ["17", "+", "13"]), 30)
+    }
+    func testSoustraction() {
+        XCTAssertEqual(testCalcul.calcul(enterNumber: ["55", "-", "5"]), 50)
+        XCTAssertEqual(testCalcul.calcul(enterNumber: ["18", "-", "2"]), 16)
+        XCTAssertEqual(testCalcul.calcul(enterNumber: ["13", "-", "17"]), -4)
     }
 
 }
