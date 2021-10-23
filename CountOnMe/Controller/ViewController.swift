@@ -32,8 +32,11 @@ class ViewController: UIViewController {
         if calculator.enterNumber.first == nil {
             textView.text = ""
         }
+        
         textView.text.append(numberText)
         calculator.enterNumber.append(numberText)
+        
+        
     }
     
     @IBAction func tappedMultiplicationButton(_ sender: UIButton) {
@@ -84,7 +87,10 @@ class ViewController: UIViewController {
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)
         }
-        calculator.calcul(textField: textView)
+        let elements = textView.text.split(separator: " ").map { "\($0)" }
+        
+        let result = " = \(calculator.calcul(enterNumber: elements))"
+        textView.text.append(result)
         
         
        

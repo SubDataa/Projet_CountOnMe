@@ -12,10 +12,11 @@ import UIKit
 
 class Calculator {
     
-    var result = 0
-    var enterNumber: [String] = [String]()
-   
 
+    var enterNumber: [String] = [String]()
+    
+
+ 
     
     // Error check computed variables
     var expressionIsCorrect: Bool {
@@ -30,12 +31,10 @@ class Calculator {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
     }
     
-    var expressionHaveResult: Bool {
-        return enterNumber.firstIndex(of: "=") != nil
-    }
     
-    func calcul(textField: UITextView) {
+    func calcul(enterNumber: [String]) -> Int  {
     
+    var result = 0
     let left = Int(enterNumber[0])!
     let operand = enterNumber[1]
     let right = Int(enterNumber[2])!
@@ -49,9 +48,7 @@ class Calculator {
     default: fatalError("Unknown operator !")
     }
     
-        textField.text = "\(result)"
-        enterNumber.removeAll()
-        enterNumber.append("\(result)")
+     return result
     }
     
 }
