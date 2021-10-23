@@ -28,8 +28,8 @@ class ViewController: UIViewController {
         guard let numberText = sender.title(for: .normal) else {
             return
         }
-        
-        if calculator.enterNumber.first == nil {
+      
+        if textView.text.firstIndex(of: "=") != nil {
             textView.text = ""
         }
         

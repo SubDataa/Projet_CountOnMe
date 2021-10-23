@@ -30,8 +30,9 @@ class Calculator {
     var canAddOperator: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
     }
-    
-    
+    var expressionHaveResult: Bool {
+           return enterNumber.firstIndex(of: "=") != nil
+       }
     func calcul(enterNumber: [String]) -> Int  {
     
     var result = 0
