@@ -33,5 +33,7 @@ class CountOnMeTests: XCTestCase {
         XCTAssertEqual(testCalcul.calcul(enterNumber: ["18", "/", "2"]), 9)
         XCTAssertEqual(testCalcul.calcul(enterNumber: ["13", "/", "17"]), 0)
     }
-
+// ajouter division par 0
+// priorité operation
+// Operant qui se suive 
 }

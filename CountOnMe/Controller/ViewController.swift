@@ -49,7 +49,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func tappedDivisionButton(_ sender: UIButton) {
-        if calculator.canAddOperator {
+        if calculator.canAddOperator  {
             textView.text.append(" / ")
             calculator.enterNumber.append("/")
         } else {
@@ -76,7 +76,7 @@ class ViewController: UIViewController {
     }
 
     @IBAction func tappedEqualButton(_ sender: UIButton) {
-        guard calculator.expressionIsCorrect else {
+        guard calculator.expressionIsCorrect && calculator.divionbyzero  else {
             let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)

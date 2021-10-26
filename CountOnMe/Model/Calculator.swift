@@ -19,6 +19,9 @@ class Calculator {
  
     
     // Error check computed variables
+    var divionbyzero: Bool {
+        return enterNumber.last != "0"
+    }
     var expressionIsCorrect: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
     }
