@@ -20,7 +20,7 @@ class Calculator {
     
     // Error check computed variables
     var divionbyzero: Bool {
-        return enterNumber.last != "0"
+        return enterNumber.last != "0" 
     }
     var expressionIsCorrect: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
@@ -35,11 +35,12 @@ class Calculator {
     }
     
     func calcul(enterNumber: [String]) -> Int  {
-    
+    //priorityCalcul()
     var result = 0
     let left = Int(enterNumber[0])!
     let operand = enterNumber[1]
     let right = Int(enterNumber[2])!
+ 
         
     switch operand {
     
@@ -53,4 +54,35 @@ class Calculator {
      return result
     }
     
+    private func priorityCalcul() {
+        
+       
+        var resultpriority = 0
+        for i in enterNumber {
+            
+            var left = 0
+            var right = 0
+            if i == "/" && enterNumber.contains("+") && enterNumber.contains("-")  {
+                guard let index = enterNumber.firstIndex(of: i) else { return }
+                left = index - 1
+                right = index + 1
+                resultpriority = left / right
+                enterNumber.remove(at: index)
+            } else if i == "*" && enterNumber.contains("+") && enterNumber.contains("-") {
+                guard let index = enterNumber.firstIndex(of: i) else { return }
+                left = index - 1
+                right = index + 1
+                resultpriority = left * right
+                enterNumber.remove(at: index)
+                
+            }
+            enterNumber.remove(at: left)
+            enterNumber.remove(at: right)
+          
+            enterNumber.insert("\(resultpriority)", at: 0)
+        }
+    }
+    func clear() {
+        enterNumber.removeAll()
+    }
 }

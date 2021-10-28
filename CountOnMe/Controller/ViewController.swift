@@ -96,6 +96,10 @@ class ViewController: UIViewController {
        
     }
     
+    @IBAction func buttonAC(_ sender: Any) {
+        calculator.clear()
+        textView.text = ""
+    }
     func errorOperator() {
         let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
