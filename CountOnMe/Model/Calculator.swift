@@ -19,13 +19,8 @@ class Calculator {
  
     
     // Error check computed variables
-    var divionbyzero: Bool {
-        return enterNumber.last != "0"
-    }
-    
-    var isPriorityCalcul: Bool {
-        return ( enterNumber.count > 4 && enterNumber.contains("+") && enterNumber.contains("*") ) || ( enterNumber.count > 4 && enterNumber.contains("-") && enterNumber.contains("*") ) || ( enterNumber.count > 4 && enterNumber.contains("+") && enterNumber.contains("/") ) || ( enterNumber.count > 4 && enterNumber.contains("-") && enterNumber.contains("*") )
-    }
+
+  
     
     var expressionIsCorrect: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
@@ -39,76 +34,55 @@ class Calculator {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
     }
     
-    func calcul() -> Int  {
-        var result = 0
-        if isPriorityCalcul {
-            priority()
-            let left = Int(enterNumber[0])!
-            let operand = enterNumber[1]
-            let right = Int(enterNumber[2])!
+    func shouldDivide() -> Bool {
+        for i in 0...enterNumber.count - 1{
+            if enterNumber[i] == "/" && enterNumber[i + 1] == "0" {
+             return false
+            }
+        }
+        return true
+    }
+    
+    func calcul() -> Double {
+        var result = 0.0
+        
+        while enterNumber.count > 1 {
+            var priorityIndex = 0
+            let indexOfMultiplication = enterNumber.firstIndex(of: "*")
+            let indexOfDivision = enterNumber.firstIndex(of: "/")
          
+            
+            if indexOfMultiplication == nil {
+            priorityIndex = indexOfDivision ?? 1
                 
+            } else if indexOfDivision == nil {
+            priorityIndex = indexOfMultiplication ?? 1
+            }
+            
+            
+            let left = Double(enterNumber[priorityIndex - 1])!
+            let operand = enterNumber[priorityIndex]
+            let right = Double(enterNumber[priorityIndex + 1])!
+            
             switch operand {
             
             case "+": result = left + right
             case "-": result = left - right
             case "*": result = left * right
             case "/": result = left / right
+           
             default: fatalError("Unknown operator !")
             }
-        }  else {
             
-       
+            enterNumber.removeSubrange(priorityIndex - 1...priorityIndex + 1)
+            enterNumber.insert("\(result)", at: priorityIndex - 1)
     
-    let left = Int(enterNumber[0])!
-    let operand = enterNumber[1]
-    let right = Int(enterNumber[2])!
- 
-        
-    switch operand {
-    
-    case "+": result = left + right
-    case "-": result = left - right
-    case "*": result = left * right
-    case "/": result = left / right
-    default: fatalError("Unknown operator !")
-    }
         }
-     return result
+        return Double(enterNumber[0])!
     }
     
-  
-    func priority() {
-        var result = 0
-        for i in 0...enterNumber.count {
-            if enterNumber[i] == "/" {
-                let left = Int(enterNumber[i-1])!
-                let right = Int(enterNumber[i+1])!
-
-                result = left / right
-                enterNumber.insert("\(result)", at: i+2)
-                enterNumber.remove(at: i+1)
-                enterNumber.remove(at: i)
-                enterNumber.remove(at: i-1)
-                return
-                
-            } else if enterNumber[i] == "*" {
-                let left = Int(enterNumber[i-1])!
-                let right = Int(enterNumber[i+1])!
-               
-                result = left * right
-                enterNumber.insert("\(result)", at: i+2)
-                enterNumber.remove(at: i+1)
-                enterNumber.remove(at: i)
-                enterNumber.remove(at: i-1)
-                return
-                
-            }
-
-            
-        }
-    }
     func clear() {
         enterNumber.removeAll()
     }
+
 }
