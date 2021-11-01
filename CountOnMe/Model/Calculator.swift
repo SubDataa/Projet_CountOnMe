@@ -20,8 +20,13 @@ class Calculator {
     
     // Error check computed variables
     var divionbyzero: Bool {
-        return enterNumber.last != "0" 
+        return enterNumber.last != "0"
     }
+    
+    var isPriorityCalcul: Bool {
+        return ( enterNumber.count > 4 && enterNumber.contains("+") && enterNumber.contains("*") ) || ( enterNumber.count > 4 && enterNumber.contains("-") && enterNumber.contains("*") ) || ( enterNumber.count > 4 && enterNumber.contains("+") && enterNumber.contains("/") ) || ( enterNumber.count > 4 && enterNumber.contains("-") && enterNumber.contains("*") )
+    }
+    
     var expressionIsCorrect: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
     }
@@ -34,9 +39,27 @@ class Calculator {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
     }
     
-    func calcul(enterNumber: [String]) -> Int  {
-    //priorityCalcul()
-    var result = 0
+    func calcul() -> Int  {
+        var result = 0
+        if isPriorityCalcul {
+            priority()
+            let left = Int(enterNumber[0])!
+            let operand = enterNumber[1]
+            let right = Int(enterNumber[2])!
+         
+                
+            switch operand {
+            
+            case "+": result = left + right
+            case "-": result = left - right
+            case "*": result = left * right
+            case "/": result = left / right
+            default: fatalError("Unknown operator !")
+            }
+        }  else {
+            
+       
+    
     let left = Int(enterNumber[0])!
     let operand = enterNumber[1]
     let right = Int(enterNumber[2])!
@@ -50,36 +73,39 @@ class Calculator {
     case "/": result = left / right
     default: fatalError("Unknown operator !")
     }
-    
+        }
      return result
     }
     
-    private func priorityCalcul() {
-        
-       
-        var resultpriority = 0
-        for i in enterNumber {
-            
-            var left = 0
-            var right = 0
-            if i == "/" && enterNumber.contains("+") && enterNumber.contains("-")  {
-                guard let index = enterNumber.firstIndex(of: i) else { return }
-                left = index - 1
-                right = index + 1
-                resultpriority = left / right
-                enterNumber.remove(at: index)
-            } else if i == "*" && enterNumber.contains("+") && enterNumber.contains("-") {
-                guard let index = enterNumber.firstIndex(of: i) else { return }
-                left = index - 1
-                right = index + 1
-                resultpriority = left * right
-                enterNumber.remove(at: index)
+  
+    func priority() {
+        var result = 0
+        for i in 0...enterNumber.count {
+            if enterNumber[i] == "/" {
+                let left = Int(enterNumber[i-1])!
+                let right = Int(enterNumber[i+1])!
+
+                result = left / right
+                enterNumber.insert("\(result)", at: i+2)
+                enterNumber.remove(at: i+1)
+                enterNumber.remove(at: i)
+                enterNumber.remove(at: i-1)
+                return
+                
+            } else if enterNumber[i] == "*" {
+                let left = Int(enterNumber[i-1])!
+                let right = Int(enterNumber[i+1])!
+               
+                result = left * right
+                enterNumber.insert("\(result)", at: i+2)
+                enterNumber.remove(at: i+1)
+                enterNumber.remove(at: i)
+                enterNumber.remove(at: i-1)
+                return
                 
             }
-            enterNumber.remove(at: left)
-            enterNumber.remove(at: right)
-          
-            enterNumber.insert("\(resultpriority)", at: 0)
+
+            
         }
     }
     func clear() {
