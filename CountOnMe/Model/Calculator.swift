@@ -12,15 +12,12 @@ import UIKit
 
 class Calculator {
     
-
+    
     var enterNumber: [String] = [String]()
     
-
- 
     
     // Error check computed variables
-
-  
+    
     
     var expressionIsCorrect: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"
@@ -37,7 +34,7 @@ class Calculator {
     func shouldDivide() -> Bool {
         for i in 0...enterNumber.count - 1{
             if enterNumber[i] == "/" && enterNumber[i + 1] == "0" {
-             return false
+                return false
             }
         }
         return true
@@ -50,13 +47,13 @@ class Calculator {
             var priorityIndex = 0
             let indexOfMultiplication = enterNumber.firstIndex(of: "*")
             let indexOfDivision = enterNumber.firstIndex(of: "/")
-         
+            
             
             if indexOfMultiplication == nil {
-            priorityIndex = indexOfDivision ?? 1
+                priorityIndex = indexOfDivision ?? 1
                 
             } else if indexOfDivision == nil {
-            priorityIndex = indexOfMultiplication ?? 1
+                priorityIndex = indexOfMultiplication ?? 1
             }
             
             
@@ -70,13 +67,13 @@ class Calculator {
             case "-": result = left - right
             case "*": result = left * right
             case "/": result = left / right
-           
+                
             default: fatalError("Unknown operator !")
             }
             
             enterNumber.removeSubrange(priorityIndex - 1...priorityIndex + 1)
             enterNumber.insert("\(result)", at: priorityIndex - 1)
-    
+            
         }
         return Double(enterNumber[0])!
     }
@@ -84,5 +81,5 @@ class Calculator {
     func clear() {
         enterNumber.removeAll()
     }
-
+    
 }
