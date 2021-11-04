@@ -93,9 +93,7 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         
-    
-        let elements = textView.text.split(separator: " ").map { "\($0)" }
-        
+        calculator.enterNumber = textView.text.split(separator: " ").map { "\($0)" }
         let result = " = \(calculator.calcul())"
         textView.text.append(result)
         

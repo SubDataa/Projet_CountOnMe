@@ -17,7 +17,9 @@ class Calculator {
     
     
     // Error check computed variables
-    
+    //var elements: [String] {
+    //    return enterNumber.split(separator: " ").map { "\($0)" }
+    //}
     
     var expressionIsCorrect: Bool {
         return enterNumber.last != "+" && enterNumber.last != "-" && enterNumber.last != "/" && enterNumber.last != "*"

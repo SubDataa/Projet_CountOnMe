@@ -65,7 +65,7 @@ class CountOnMeTests: XCTestCase {
     }
     
     func testClear() {
-        testCalcul.enterNumber = ["55", "+", "+"]
+        testCalcul.enterNumber = ["55", "+", "6"]
         testCalcul.clear()
         XCTAssertEqual(testCalcul.enterNumber, [])
     }
