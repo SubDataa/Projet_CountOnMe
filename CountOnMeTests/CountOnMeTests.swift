@@ -25,12 +25,17 @@ class CountOnMeTests: XCTestCase {
     func testMultiplication() {
         testCalcul.enterNumber = ["5", "*", "5"]
         XCTAssertEqual(testCalcul.calcul(), 25)
-        testCalcul.enterNumber = ["2", "+", "5", "*", "2"]
-        XCTAssertEqual(testCalcul.calcul(), 12)
     }
     func testDivision() {
         testCalcul.enterNumber = ["50", "/", "5"]
         XCTAssertEqual(testCalcul.calcul(), 10)
+        
+    }
+    func testPriorityMultiplication() {
+        testCalcul.enterNumber = ["2", "+", "5", "*", "2"]
+        XCTAssertEqual(testCalcul.calcul(), 12)
+    }
+    func testPriorityDivision() {
         testCalcul.enterNumber = ["10", "+", "50", "/", "5"]
         XCTAssertEqual(testCalcul.calcul(), 20)
     }
