@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     }
     
     
-    // View actions
+    //MARK:  View actions
+    // When number button was pressed adding number in text view and in enterNumber
     @IBAction func tappedNumberButton(_ sender: UIButton) {
         guard let numberText = sender.title(for: .normal) else {
             return
@@ -35,10 +36,9 @@ class ViewController: UIViewController {
         
         textView.text.append(numberText)
         calculator.enterNumber.append(numberText)
-        
-        
     }
     
+    // When multiplication button was pressed adding operator in text view and in enterNumber
     @IBAction func tappedMultiplicationButton(_ sender: UIButton) {
         if calculator.canAddOperator {
             textView.text.append(" * ")
@@ -48,6 +48,7 @@ class ViewController: UIViewController {
         }
     }
     
+    // When divide button was pressed adding operator in text view and in enterNumber
     @IBAction func tappedDivisionButton(_ sender: UIButton) {
         if calculator.canAddOperator  {
             textView.text.append(" / ")
@@ -56,7 +57,7 @@ class ViewController: UIViewController {
             errorOperator()
         }
     }
-    
+    // When addition button was pressed adding operator in text view and in enterNumber
     @IBAction func tappedAdditionButton(_ sender: UIButton) {
         if calculator.canAddOperator {
             textView.text.append(" + ")
@@ -65,7 +66,7 @@ class ViewController: UIViewController {
             errorOperator()
         }
     }
-    
+    // When substraction button was pressed adding operator in text view and in enterNumber
     @IBAction func tappedSubstractionButton(_ sender: UIButton) {
         if calculator.canAddOperator {
             textView.text.append(" - ")
@@ -75,6 +76,7 @@ class ViewController: UIViewController {
         }
     }
 
+    // When equal button was pressed make calculation
     @IBAction func tappedEqualButton(_ sender: UIButton) {
         guard calculator.expressionIsCorrect else {
             let alertVC = UIAlertController(title: "Zéro!", message: "Entrez une expression correcte !", preferredStyle: .alert)
@@ -100,11 +102,13 @@ class ViewController: UIViewController {
         
        
     }
-    
+    // When AC button was pressed remove the value in text view
     @IBAction func buttonAC(_ sender: Any) {
         calculator.clear()
         textView.text = ""
     }
+    
+    // Show error message
     func errorOperator() {
         let alertVC = UIAlertController(title: "Zéro!", message: "Un operateur est déja mis !", preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
