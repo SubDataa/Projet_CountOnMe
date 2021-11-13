@@ -90,7 +90,7 @@ class ViewController: UIViewController {
             return self.present(alertVC, animated: true, completion: nil)
         }
         guard calculator.shouldDivide() else {
-            let alertVC = UIAlertController(title: "Incorrecte!", message: "Vous ne pouvez pas faire une division par zero", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: "Expression Incorrecte!", message: "Vous ne pouvez pas faire une division par zero", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
             return self.present(alertVC, animated: true, completion: nil)
         }
