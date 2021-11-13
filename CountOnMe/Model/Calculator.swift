@@ -46,11 +46,13 @@ class Calculator {
             let indexOfDivision = enterNumber.firstIndex(of: "/")
             
             
-            if indexOfMultiplication == nil {
-                priorityIndex = indexOfDivision ?? 1
-                
-            } else if indexOfDivision == nil {
+            if indexOfMultiplication != nil {
                 priorityIndex = indexOfMultiplication ?? 1
+                
+            } else if indexOfDivision != nil {
+                priorityIndex = indexOfDivision ?? 1
+            } else {
+                priorityIndex = 1
             }
             
             

@@ -39,7 +39,11 @@ class CountOnMeTests: XCTestCase {
         testCalcul.enterNumber = ["10", "+", "50", "/", "5"]
         XCTAssertEqual(testCalcul.calcul(), 20)
     }
-    
+    func testDivisionAndMultiplication() {
+        testCalcul.enterNumber = ["2", "+", "5", "*", "2", "/", "5"]
+        XCTAssertEqual(testCalcul.calcul(), 4)
+    }
+
     func testDivisionByZero() {
         testCalcul.enterNumber = ["55", "/", "0"]
         XCTAssertFalse(testCalcul.shouldDivide())
@@ -68,6 +72,7 @@ class CountOnMeTests: XCTestCase {
         testCalcul.enterNumber = ["55", "+", "5"]
         XCTAssertTrue(testCalcul.canAddOperator)
     }
+    
     
     func testClear() {
         testCalcul.enterNumber = ["55", "+", "6"]
